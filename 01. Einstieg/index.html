@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+	<script type="text/javascript">
+		var forgetPop = true;
+		function onPopState(event) {
+			if(forgetPop){
+				forgetPop = false;
+			} else {
+				parent.postMessage(event.target.location.href, "app://obsidian.md");
+			}
+        }
+		window.onpopstate = onPopState;
+		window.onmessage = event => {
+			if(event.data == "reload"){
+				window.document.location.reload();
+			}
+			forgetPop = true;
+		}
+
+		function fitElements(){
+			const itemsToFit = document.getElementsByClassName('fitText');
+			for (const item in itemsToFit) {
+				if (Object.hasOwnProperty.call(itemsToFit, item)) {
+					var element = itemsToFit[item];
+					fitElement(element,1, 1000);
+					element.classList.remove('fitText');
+				}
+			}
+		}
+
+		function fitElement(element, start, end){
+
+			let size = (end + start) / 2;
+			element.style.fontSize = `${size}px`;
+
+			if(Math.abs(start - end) < 1){
+				while(element.scrollHeight > element.offsetHeight){
+					size--;
+					element.style.fontSize = `${size}px`;
+				}
+				return;
+			}
+
+			if(element.scrollHeight > element.offsetHeight){
+				fitElement(element, start, size);
+			} else {
+				fitElement(element, size, end);
+			}		
+		}
+
+
+		document.onreadystatechange = () => {
+			fitElements();
+			if (document.readyState === 'complete') {
+				if (window.location.href.indexOf("?export") != -1){
+					parent.postMessage(event.target.location.href, "app://obsidian.md");
+				}
+				if (window.location.href.indexOf("print-pdf") != -1){
+					let stateCheck = setInterval(() => {
+						clearInterval(stateCheck);
+						window.print();
+					}, 250);
+				}
+			}
+	};
+
+
+        </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#PythonGuide 
+# Einstieg
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Beispiel 01
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Hello World
+```python
+print("Hello World")
+```
+Output:
+```cmd
+Hello World
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Erklärung
+1. **print** ist der Name der Funktion.
+2. **()** gibt an, dass es sich um einen Funktionsaufruf handelt.
+3. **"Hello World"** ist das Argument/Übergabeparameter, das an die Funktion übergeben wird.
+4. **""** definieren einen *String* (Zeichenkette).
+
+Das heißt, die Funktion **print** nimmt in diesem Fall den *String* **"Hello World"** als Argument entgegen und gibt diesen in der Konsole aus.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Beispiel 02
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Erste Variablen definieren
+```python
+name = "Carina"
+alter = 25
+```
+Output:
+```cmd
+# Kein direkter Output im Skript, da wir nur Variablen zugewiesen haben.
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Erklärung
+1. **name** und **alter** sind Variablennamen.
+2. **=** ist der Zuweisungsoperator, der einer Variablen einen Wert zuweist.
+3. **"Carina"** ist ein *String*-Wert.
+4. **25** ist ein Integer-Wert (ganze Zahl).
+
+Das heißt, wir haben eine Variable namens **name** erstellt und ihr den *String*-Wert **"Carina"** zugewiesen. Ebenso haben wir eine Variable namens **alter** erstellt und ihr den Integer-Wert **25** zugewiesen.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Beispiel 03
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Erste Funktion schreiben
+```python
+def PersonIs(name, age):
+    print(name + " ist " + str(age))
+PersonIs("Carina", 25)
+```
+Output:
+```cmd
+Carina ist 25
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Erklärung
+1. **def** beginnt die Definition einer Funktion.
+2. **PersonIs** ist der Name der Funktion.
+3. **name** und **age** sind Parameter der Funktion.
+4. Innerhalb der Funktion verwenden wir den `print`-Befehl, um eine Nachricht auszugeben.
+5. **str(age)** konvertiert das Alter (einen Integer) in einen String, damit er mit anderen Strings verbunden werden kann.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Beispiel 04
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Erste Funktion mit Rückgabewert schreiben
+```python
+def PersonIs(name, age):
+    return name + " ist " + str(age)
+print(PersonIs("Carina", 25))
+```
+Output:
+```cmd
+Carina ist 25
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Erklärung
+1. **return** gibt einen Wert aus der Funktion zurück.
+2. Anstelle des direkten Druckens innerhalb der Funktion gibt die Funktion nun einen String zurück.
+3. Dieser zurückgegebene String wird dann außerhalb der Funktion mit `print` ausgegeben.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Beispiel 05
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### f-Strings (formatierte Zeichenketten)
+```python
+name = "Carina"
+alter = 25
+
+nachricht = f"Mein Name ist {name} und ich bin {alter} Jahre alt."
+
+print(nachricht)
+```
+Output:
+```cmd
+Mein Name ist Carina und ich bin 25 Jahre alt.
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Erklärung
+1. **f"..."** kennzeichnet den Anfang eines f-Strings in Python. Der Buchstabe "f" vor den Anführungszeichen gibt an, dass es sich um einen formatierten String handelt.
+2. **{name}** und **{alter}** sind Platzhalter innerhalb des f-Strings. Sie werden durch den Wert der entsprechenden Variablen ersetzt.
+3. In unserem Beispiel wird `{name}` durch "Carina" und `{alter}` durch "25" ersetzt.
+4. **nachricht = f"..."** speichert den formatierten String in der Variable `nachricht`.
+5. **print(nachricht)** gibt die zusammengesetzte Nachricht aus.
+
+f-Strings bieten eine einfache und leserliche Möglichkeit, Werte in Zeichenketten einzufügen. Sie sind besonders nützlich, wenn Sie mehrere Werte in einen Text einfügen möchten oder wenn die Werte dynamisch sind und sich während der Laufzeit des Programms ändern können.
+
+f-Strings sind seit Python 3.6 verfügbar und sind eine elegante Möglichkeit, formatierte Strings in Python zu erstellen.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Beispiel 06
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Texteingabe über die Konsole
+```python
+name = input("Bitte geben Sie Ihren Namen ein: ")
+alter = input("Bitte geben Sie Ihr Alter ein: ")
+
+print(f"Hallo {name}! Sie sind {alter} Jahre alt.")
+```
+Output (Beispiel):
+```cmd
+Bitte geben Sie Ihren Namen ein: Carina
+Bitte geben Sie Ihr Alter ein: 25
+Hallo Carina! Sie sind 25 Jahre alt.
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Erklärung
+1. **input()** ist eine eingebaute Funktion in Python, die den Benutzer auffordert, eine Eingabe über die Tastatur zu tätigen.
+2. **"Bitte geben Sie Ihren Namen ein: "** ist ein Hinweistext, der dem Benutzer zeigt, welche Information er eingeben soll. 
+3. **name = input(...)** speichert die vom Benutzer eingegebene Antwort in der Variable `name`.
+4. **f"Hallo {name}! Sie sind {alter} Jahre alt."** verwendet f-Strings (Format Strings), um die Variablen `name` und `alter` in den resultierenden String einzufügen.
+5. **print(...)** gibt die zusammengesetzte Nachricht auf der Konsole aus.
+</div></script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/math/math.js"></script>
+	<script src="plugin/mermaid/mermaid.js"></script>
+	<script src="plugin/chart/chart.min.js"></script>
+	<script src="plugin/chart/plugin.js"></script>
+	<script src="plugin/customcontrols/plugin.js"></script>
+
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+	  function isLight(color) {
+		let hex = color.replace('#', '');
+
+		// convert #fff => #ffffff
+		if(hex.length == 3){
+			hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+		}
+
+		const c_r = parseInt(hex.substr(0, 2), 16);
+		const c_g = parseInt(hex.substr(2, 2), 16);
+		const c_b = parseInt(hex.substr(4, 2), 16);
+		const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+		return brightness > 155;
+	}
+
+	var bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+	var isLight = isLight(bgColor);
+
+	if(isLight){
+		document.body.classList.add('has-light-background');
+	} else {
+		document.body.classList.add('has-dark-background');
+	}
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath.MathJax3,
+		  RevealMermaid,
+		  RevealChart,
+		  RevealCustomControls,
+        ],
+
+
+    	allottedTime: 120 * 1000,
+
+		mathjax3: {
+			mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+		},
+		markdown: {
+		  gfm: true,
+		  mangle: true,
+		  pedantic: false,
+		  smartLists: false,
+		  smartypants: false,
+		},
+
+		mermaid: {
+			theme: isLight ? 'default' : 'dark',
+		},
+
+		customcontrols: {
+			controls: [
+			]
+		},
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":960,"height":700,"margin":0.04,"controls":true,"progress":true,"slideNumber":false,"transition":"slide","transitionSpeed":"default"}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+
+  <!-- created with Advanced Slides -->
+</html>
